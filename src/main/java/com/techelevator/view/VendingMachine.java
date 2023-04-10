@@ -30,7 +30,7 @@ public class VendingMachine{
 
     public double[] returnChange() {
         // array of denominations, in descending order
-        double[] denominations = {100.0, 50.0, 20.0, 10.0, 5.0, 2.0, 1.0, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01};
+        double[] denominations = {100.00, 50.00, 20.00, 10.00, 5.00, 1.00, 0.25, 0.10, 0.05, 0.01};
 
         // array to hold the number of each denomination to return as change
         double[] change = new double[denominations.length];
