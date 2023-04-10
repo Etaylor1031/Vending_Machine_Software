@@ -3,17 +3,50 @@ package com.techelevator.view;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
 public class VendingMachine{
+    private double balanceDue = 5.00;
+    private double customerMoney;
     private Map<String, Product> vendingMachine;
 
     public VendingMachine() {
         this.vendingMachine = new TreeMap<>();
     }
+
+    public void transaction() {
+        createTransaction();
+    }
+    private void createTransaction() {
+        this.balanceDue = balanceDue;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the amount tendered: ");
+        customerMoney = scanner.nextDouble();
+    }
+
+    public double[] returnChange() {
+        double[] denominations = {100.0, 50.0, 20.0, 10.0, 5.0, 2.0, 1.0, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01};
+        double[] change = new double[denominations.length];
+        double totalChange = customerMoney - balanceDue;
+        System.out.println("Change to be returned: " + totalChange);
+        for (int i = 0; i < denominations.length && totalChange > 0; i++) {
+            change[i] = Math.floor(totalChange / denominations[i]);
+            totalChange -= change[i] * denominations[i];
+        }
+        System.out.println("Change denominations:");
+        for (int i = 0; i < change.length; i++) {
+            System.out.println(change[i]);
+        }
+        return change;
+    }
+
+    public static void main(String[] args) {
+        VendingMachine vm = new VendingMachine();
+        double[] change = vm.returnChange();
+    }
+
 
     public void loadInventory() {
         // Create a File object using its path name
