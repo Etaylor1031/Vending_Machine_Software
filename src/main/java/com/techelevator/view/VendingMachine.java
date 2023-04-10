@@ -20,32 +20,42 @@ public class VendingMachine{
         createTransaction();
     }
     private void createTransaction() {
+        // Set the balance due to the item cost
         this.balanceDue = balanceDue;
+        // Prompt the user for the amount tendered
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the amount tendered: ");
+        // Read in the amount tendered from the user
         customerMoney = scanner.nextDouble();
     }
 
     public double[] returnChange() {
+        // array of denominations, in descending order
         double[] denominations = {100.0, 50.0, 20.0, 10.0, 5.0, 2.0, 1.0, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01};
+        // array to hold the number of each denomination to return as change
         double[] change = new double[denominations.length];
+        // calculate the total amount of change to be returned
         double totalChange = customerMoney - balanceDue;
+        // print the total amount of change to be returned
         System.out.println("Change to be returned: " + totalChange);
+        // loop through the denominations array and calculate the number of each denomination to return as change
         for (int i = 0; i < denominations.length && totalChange > 0; i++) {
             change[i] = Math.floor(totalChange / denominations[i]);
             totalChange -= change[i] * denominations[i];
         }
+        // print out the number of each denomination to be returned as change
         System.out.println("Change denominations:");
         for (int i = 0; i < change.length; i++) {
             System.out.println(change[i]);
         }
+        // return the array of denominations
         return change;
     }
 
-    public static void main(String[] args) {
-        VendingMachine vm = new VendingMachine();
-        double[] change = vm.returnChange();
-    }
+
+
+
+
 
 
     public void loadInventory() {
