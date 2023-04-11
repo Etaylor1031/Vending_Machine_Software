@@ -16,6 +16,6 @@ public class VendingMachineInterface {
     }
 
     public void purchase() {
-        vendingMachine.purchaseVendingMachine();
+        vendingMachine.purchaseProduct();
     }
 }
