@@ -51,4 +51,8 @@ public class Product {
     public void setProductType(String productType) {
         this.productType = productType;
     }
+
+    public void decrementProductCount(){
+        this.productCount--;
+    }
 }
