@@ -14,4 +14,8 @@ public class VendingMachineInterface {
     public void display() {
         vendingMachine.displayVendingMachine();
     }
+
+    public void purchase() {
+        vendingMachine.purchaseProduct();
+    }
 }

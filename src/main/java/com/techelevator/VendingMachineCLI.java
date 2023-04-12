@@ -18,17 +18,19 @@ public class VendingMachineCLI {
 	}
 
 	public void run() {
-		VendingMachineInterface vM = new VendingMachineInterface();
-		vM.load();
+		// Restock the Vending Machine
+		VendingMachineInterface vendingMachine = new VendingMachineInterface();
+		vendingMachine.load();
 
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
-				vM.display();
+				vendingMachine.display();
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
+				vendingMachine.purchase();
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				break;
 			}
