@@ -1,5 +1,7 @@
 package com.techelevator.view;
 
+import com.techelevator.products.Product;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;

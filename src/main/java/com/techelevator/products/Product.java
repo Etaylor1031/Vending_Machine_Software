@@ -1,4 +1,4 @@
-package com.techelevator.view;
+package com.techelevator.products;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
