@@ -24,3 +24,5 @@ REFACTORING GOALS:
 
 6. Rename the Map<String, Product> attribute to something clearer, as the VendingMachine class having a specific
    attribute named vendingMachine which isn't an instance of itself is confusing
+
+7. Move the load()/loadInventory() process to the VendingMachine constructor;
