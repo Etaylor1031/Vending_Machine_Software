@@ -62,7 +62,7 @@ public class VendingMachine{
 
     public void purchaseProduct(String productChoice) {
         // Dispense the product
-        productRack.dispenseProduct(productChoice);
+        productRack.dispenseProduct(productChoice, moneyHandler.getBalance());
     }
 
     public BigDecimal readBalance() {

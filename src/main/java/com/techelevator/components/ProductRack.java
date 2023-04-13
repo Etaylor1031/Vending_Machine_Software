@@ -2,6 +2,7 @@ package com.techelevator.components;
 
 import com.techelevator.products.Product;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 public class ProductRack {
@@ -21,7 +22,7 @@ public class ProductRack {
             All drink items print "Glug Glug, Yum!"
             All gum items print "Chew Chew, Yum!"
          */
-    public String dispenseProduct(String productChoice) {
+    public String dispenseProduct(String productChoice, BigDecimal balance) {
         // Update balance
         Product productVM = inventory.get(productChoice);
         balance = balance.subtract(productVM.getPrice());
