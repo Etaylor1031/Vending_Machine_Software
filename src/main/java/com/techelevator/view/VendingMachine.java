@@ -65,7 +65,7 @@ public class VendingMachine{
 
         // If the product code, doesn't exist,
         // the vending machine informs the customer
-        Product productVM = productRack.get(choice);
+        Product productVM = productRack.getPurchasedProduct(choice);
         if(productVM == null) {
             System.out.printf("%s product code doesn't exist\n", choice);
             return null;

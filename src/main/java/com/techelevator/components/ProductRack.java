@@ -8,8 +8,8 @@ public class ProductRack {
     private Map<String, Product> inventory;
     private static final int  MAXIMUM_QUANTITY_AVAILABLE = 5;
 
-    public ProductRack(Map<String, Product> freshRack) {
-        this.inventory = freshRack;
+    public ProductRack(Map<String, Product> rackInventory) {
+        this.inventory = rackInventory;
     }
 
     /*
@@ -46,6 +46,10 @@ public class ProductRack {
 
         System.out.println(message);
         return message;
+    }
+
+    public Product getPurchasedProduct(String choice) {
+        return inventory.get(choice);
     }
 
     @Override
