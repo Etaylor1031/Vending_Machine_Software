@@ -9,10 +9,11 @@ import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class VendingMachine{
-    private MoneyHandler moneyHandler = new MoneyHandler();
-    private ProductRack productRack = new ProductRack();
+    private MoneyHandler moneyHandler;
+    private ProductRack productRack;
 
     private static final String PURCHASE_MENU_OPTION_FEED_MONEY = "Feed Money";
     private static final String PURCHASE_MENU_OPTION_FEED_SELECT_PRODUCT = "Select Product";
@@ -20,6 +21,7 @@ public class VendingMachine{
     private static final String[] PURCHASE_MENU_OPTIONS = { PURCHASE_MENU_OPTION_FEED_MONEY, PURCHASE_MENU_OPTION_FEED_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FEED_FINISH_TRANSACTION };
 
     public VendingMachine() {
+
         // Create a File object using its path name
         String fileName = "vendingmachine.csv";
         File dataFile = new File(fileName);
@@ -29,20 +31,21 @@ public class VendingMachine{
          Create a product object from the data in the file
          Put this product along with its slot location in a Map
          */
+        final int SLOT_LOCATION = 0;
+        Map<String, Product> freshRack = new TreeMap<String, Product>();
+
         try(Scanner fileInput = new Scanner(dataFile)) {
             while(fileInput.hasNextLine()) {
                 String lineOfText = fileInput.nextLine();
-                String [] strings = lineOfText.split("\\|");
-                String slotLocation = strings[0];
-                String productName = strings[1];
-                String price = strings[2];
-                String productType = strings[3];
-                Product product = new Product(productName, new BigDecimal(price), productType, MAXIMUM_QUANTITY_AVAILABLE);
-                vendingMachine.put(slotLocation, product);
+                String [] productDetails = lineOfText.split("\\|");
+                Product product = new Product(productDetails);
+                freshRack.put(productDetails[SLOT_LOCATION], product);
             }
         } catch(FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
+
+        this.productRack = new ProductRack(freshRack);
     }
 
     /*

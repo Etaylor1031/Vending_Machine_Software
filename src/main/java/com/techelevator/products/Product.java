@@ -20,6 +20,18 @@ public class Product {
         this.productCount = productCount;
     }
 
+    public Product (String[] productDetails) {
+
+        final int PRODUCT_NAME = 1;
+        final int PRICE = 2;
+        final int PRODUCT_TYPE = 3;
+
+        this.name = productDetails[PRODUCT_NAME];
+        this.price = new BigDecimal(productDetails[PRICE]);
+        this.productType = productDetails[PRODUCT_TYPE];
+
+    }
+
     public String getName() {
         return name;
     }

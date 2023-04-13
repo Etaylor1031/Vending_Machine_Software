@@ -9,8 +9,8 @@ public class ProductRack {
     private Map<String, Product> vendingMachine;
     private static final int  MAXIMUM_QUANTITY_AVAILABLE = 5;
 
-    public ProductRack() {
-        this.vendingMachine = new TreeMap<>();
+    public ProductRack(Map<String, Product> freshRack) {
+        this.vendingMachine = freshRack;
     }
 
     /*
