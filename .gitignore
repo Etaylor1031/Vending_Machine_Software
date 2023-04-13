@@ -1,0 +1,8 @@
+#Ignore .idea configuration files
+.idea
+
+#Ignore iml configuration file
+*.iml
+
+#Ignore target files
+target/
