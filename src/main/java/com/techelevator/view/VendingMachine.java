@@ -43,6 +43,7 @@ public class VendingMachine{
         }
 
         this.productRack = new ProductRack(rackInventory);
+        this.moneyHandler = new MoneyHandler();
     }
 
     /*
