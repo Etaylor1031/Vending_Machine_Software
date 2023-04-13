@@ -48,7 +48,7 @@ public class VendingMachine{
     /*
     Displays the Vending Machine to the User
      */
-    public String displayVendingMachine() {
+    public String displayInventory() {
         return productRack.toString();
     }
 
@@ -84,7 +84,7 @@ public class VendingMachine{
 
     public void selectProduct() {
         // Display the Vending Machine Products
-        displayVendingMachine();
+        displayInventory();
 
         // If the choice doesn't exist, return
         String productChoice = takeOrderFromCustomer();

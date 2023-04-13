@@ -1,6 +1,5 @@
 package com.techelevator.view;
 
-import java.io.BufferedWriter;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -18,7 +17,7 @@ public class VendingMachineInterface {
     }
 
     public void display() {
-        out.print(vendingMachine.displayVendingMachine());
+        out.print(vendingMachine.displayInventory());
     }
 
     public void purchase() {
