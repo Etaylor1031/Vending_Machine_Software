@@ -48,4 +48,16 @@ public class ProductRack {
         System.out.println(message);
         return message;
     }
+
+    @Override
+    public String toString() {
+        String productListings = "";
+        // Iterate through the map to for printing
+        for(Map.Entry<String, Product> productEntry : vendingMachine.entrySet()) {
+            productListings += String.format("%s %20s %10s %10s %10s\n",productEntry.getKey(), productEntry.getValue().getName(),
+                    productEntry.getValue().getPrice(), productEntry.getValue().getProductType(),
+                    productEntry.getValue().getProductCount());
+        }
+        return productListings;
+    }
 }

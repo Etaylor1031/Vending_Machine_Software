@@ -18,7 +18,7 @@ public class VendingMachineInterface {
     }
 
     public void display() {
-        vendingMachine.displayVendingMachine();
+        out.print(vendingMachine.displayVendingMachine());
     }
 
     public void purchase() {

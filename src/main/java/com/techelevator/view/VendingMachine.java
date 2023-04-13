@@ -51,12 +51,8 @@ public class VendingMachine{
     /*
     Displays the Vending Machine to the User
      */
-    public void displayVendingMachine() {
-        // Iterate through the map to for printing
-        for(Map.Entry<String, Product> productEntry : vendingMachine.entrySet()) {
-            System.out.printf("%s %20s %10s %10s %10s\n",productEntry.getKey(), productEntry.getValue().getName(),
-                    productEntry.getValue().getPrice(), productEntry.getValue().getProductType(), productEntry.getValue().getProductCount());
-        }
+    public String displayVendingMachine() {
+        return productRack.toString();
     }
 
     /*
