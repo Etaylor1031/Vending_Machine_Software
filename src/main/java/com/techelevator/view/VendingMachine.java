@@ -1,5 +1,7 @@
 package com.techelevator.view;
 
+import com.techelevator.components.MoneyHandler;
+import com.techelevator.components.ProductRack;
 import com.techelevator.products.Product;
 
 import java.io.File;
@@ -10,6 +12,8 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class VendingMachine{
+    private MoneyHandler moneyHandler = new MoneyHandler();
+    private ProductRack productRack = new ProductRack();
     private Map<String, Product> vendingMachine;
     private BigDecimal balance;
     private BigDecimal customerMoney;
