@@ -1,0 +1,26 @@
+REFACTORING GOALS:
+1. Move all console i/o for CLI use from VendingMachine class so backend will be frontend neutral.
+    -VendingMachine interface now mimics Menu.java taking InputStream and OutputStream parameters and turning them into
+     a Scanner object and a PrintWriter object respectively
+    -The plan here is to move all of the Scanner objects and System.out calls from the VendingMachine methods into the
+     the VendingMachineInterface methods that call them for the sake of making the code more maintainable in the event
+     that a different UI that isn't a CLI is ever added
+
+2. Divide VendingMachine's methods and attributes into MoneyHandler and ProductRack and then make those components
+   attributes of the VendingMachine class
+    -This is both so that future changes to either component won't impact the code in the other component (i.e improve
+     encapsulation) and to simply make each portion of code more readable and maintainable
+
+3. Create separate Product subclasses to represent Chips, Candy, Gum, and Soda and make the original Product class
+   abstract
+        -That way the VendingMachine class doesn't have to worry about keeping track of and handling different Product
+         types; the Product types will handle themselves
+
+4. Remove the Setters for the Product class
+    -These should be handled by the Product constructors and shouldn't ever be changed once Constructed
+
+5. Rename strings[] in the loadInventory method to Product details and create constants to represent the indexes so as
+   to remove the need for the array contents to be sorted into separately named strings
+
+6. Rename the Map<String, Product> attribute to something clearer, as the VendingMachine class having a specific
+   attribute named vendingMachine which isn't an instance of itself is confusing
