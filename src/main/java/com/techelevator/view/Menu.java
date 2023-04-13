@@ -15,7 +15,12 @@ public class Menu {
 		this.in = new Scanner(input);
 	}
 
-	public Object getChoiceFromOptions(Object[] options) {
+    public Menu(Scanner in, PrintWriter out) {
+		this.in = in;
+		this.out = out;
+    }
+
+    public Object getChoiceFromOptions(Object[] options) {
 		Object choice = null;
 		while (choice == null) {
 			displayMenuOptions(options);

@@ -15,10 +15,7 @@ public class VendingMachine{
     private MoneyHandler moneyHandler;
     private ProductRack productRack;
 
-    private static final String PURCHASE_MENU_OPTION_FEED_MONEY = "Feed Money";
-    private static final String PURCHASE_MENU_OPTION_FEED_SELECT_PRODUCT = "Select Product";
-    private static final String PURCHASE_MENU_OPTION_FEED_FINISH_TRANSACTION = "Finish Transaction";
-    private static final String[] PURCHASE_MENU_OPTIONS = { PURCHASE_MENU_OPTION_FEED_MONEY, PURCHASE_MENU_OPTION_FEED_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FEED_FINISH_TRANSACTION };
+
 
     public VendingMachine() {
 
@@ -98,24 +95,19 @@ public class VendingMachine{
         productRack.dispenseProduct(productChoice);
     }
 
+    public void finishTransaction() {
+        moneyHandler.returnChange();
+    }
+
     public void purchaseProduct() {
-        Menu purchaseMenu = new Menu(System.in, System.out);
-        while(true) {
-            // Do Purchase
-            System.out.printf("Current Money Provided: $%.2f\n", moneyHandler.getBalance());
-            String purchaseChoice = (String) purchaseMenu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
-            if(purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
-                // Feed Money
-                moneyHandler.feedMoney();
-            } else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_SELECT_PRODUCT)) {
-                // Select Product
-                selectProduct();
-            } else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_FINISH_TRANSACTION)) {
-                // Finish Transaction
-                moneyHandler.returnChange();
-                //Return to main menu
-                break;
-            }
-        }
+
+    }
+
+    public BigDecimal readBalance() {
+        return moneyHandler.getBalance();
+    }
+
+    public void addMoney() {
+        moneyHandler.feedMoney();
     }
 }

@@ -63,4 +63,5 @@ public class MoneyHandler {
     public BigDecimal getBalance() {
         return balance;
     }
+
 }

@@ -52,7 +52,7 @@ public class ProductRack {
     @Override
     public String toString() {
         String productListings = "";
-        // Iterate through the map to for printing
+        // Iterate through the map and organize the data into a formatted String for displaying to user
         for(Map.Entry<String, Product> productEntry : vendingMachine.entrySet()) {
             productListings += String.format("%s %20s %10s %10s %10s\n",productEntry.getKey(), productEntry.getValue().getName(),
                     productEntry.getValue().getPrice(), productEntry.getValue().getProductType(),
