@@ -20,13 +20,6 @@ public class VendingMachine{
     private static final String[] PURCHASE_MENU_OPTIONS = { PURCHASE_MENU_OPTION_FEED_MONEY, PURCHASE_MENU_OPTION_FEED_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FEED_FINISH_TRANSACTION };
 
     public VendingMachine() {
-
-    }
-
-    /*
-    Restock the Vending Machine
-     */
-    public void loadInventory() {
         // Create a File object using its path name
         String fileName = "vendingmachine.csv";
         File dataFile = new File(fileName);

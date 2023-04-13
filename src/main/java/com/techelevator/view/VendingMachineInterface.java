@@ -17,10 +17,6 @@ public class VendingMachineInterface {
         this.out = new PrintWriter(output);
     }
 
-    public void load() {
-        vendingMachine.loadInventory();
-    }
-
     public void display() {
         vendingMachine.displayVendingMachine();
     }

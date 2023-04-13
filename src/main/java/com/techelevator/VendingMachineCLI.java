@@ -20,7 +20,6 @@ public class VendingMachineCLI {
 	public void run() {
 		// Restock the Vending Machine
 		VendingMachineInterface vendingMachine = new VendingMachineInterface(System.in, System.out);
-		vendingMachine.load();
 
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
