@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ProductRack {
     private Map<String, Product> inventory;
-    private static final int  MAXIMUM_QUANTITY_AVAILABLE = 5;
+
 
     public ProductRack(Map<String, Product> rackInventory) {
         this.inventory = rackInventory;

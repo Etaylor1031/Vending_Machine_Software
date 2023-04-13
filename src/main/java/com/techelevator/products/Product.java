@@ -9,6 +9,7 @@ public class Product {
     private int productCount;
 
     private String productType;
+    private static final int  MAXIMUM_QUANTITY_AVAILABLE = 5;
 
     public Product() {}
 
@@ -29,6 +30,7 @@ public class Product {
         this.name = productDetails[PRODUCT_NAME];
         this.price = new BigDecimal(productDetails[PRICE]);
         this.productType = productDetails[PRODUCT_TYPE];
+        this.productCount = MAXIMUM_QUANTITY_AVAILABLE;
 
     }
 
