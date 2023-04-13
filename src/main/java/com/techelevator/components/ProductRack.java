@@ -3,14 +3,13 @@ package com.techelevator.components;
 import com.techelevator.products.Product;
 
 import java.util.Map;
-import java.util.TreeMap;
 
 public class ProductRack {
-    private Map<String, Product> vendingMachine;
+    private Map<String, Product> inventory;
     private static final int  MAXIMUM_QUANTITY_AVAILABLE = 5;
 
     public ProductRack(Map<String, Product> freshRack) {
-        this.vendingMachine = freshRack;
+        this.inventory = freshRack;
     }
 
     /*
@@ -24,7 +23,7 @@ public class ProductRack {
          */
     public String dispenseProduct(String productChoice) {
         // Update balance
-        Product productVM = vendingMachine.get(productChoice);
+        Product productVM = inventory.get(productChoice);
         balance = balance.subtract(productVM.getPrice());
 
         // Update productCount
@@ -53,7 +52,7 @@ public class ProductRack {
     public String toString() {
         String productListings = "";
         // Iterate through the map and organize the data into a formatted String for displaying to user
-        for(Map.Entry<String, Product> productEntry : vendingMachine.entrySet()) {
+        for(Map.Entry<String, Product> productEntry : inventory.entrySet()) {
             productListings += String.format("%s %20s %10s %10s %10s\n",productEntry.getKey(), productEntry.getValue().getName(),
                     productEntry.getValue().getPrice(), productEntry.getValue().getProductType(),
                     productEntry.getValue().getProductCount());

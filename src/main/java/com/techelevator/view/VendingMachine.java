@@ -29,20 +29,20 @@ public class VendingMachine{
          Put this product along with its slot location in a Map
          */
         final int SLOT_LOCATION = 0;
-        Map<String, Product> freshRack = new TreeMap<String, Product>();
+        Map<String, Product> rackInventory = new TreeMap<String, Product>();
 
         try(Scanner fileInput = new Scanner(dataFile)) {
             while(fileInput.hasNextLine()) {
                 String lineOfText = fileInput.nextLine();
                 String [] productDetails = lineOfText.split("\\|");
                 Product product = new Product(productDetails);
-                freshRack.put(productDetails[SLOT_LOCATION], product);
+                rackInventory.put(productDetails[SLOT_LOCATION], product);
             }
         } catch(FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
 
-        this.productRack = new ProductRack(freshRack);
+        this.productRack = new ProductRack(rackInventory);
     }
 
     /*
@@ -65,7 +65,7 @@ public class VendingMachine{
 
         // If the product code, doesn't exist,
         // the vending machine informs the customer
-        Product productVM = vendingMachine.get(choice);
+        Product productVM = productRack.get(choice);
         if(productVM == null) {
             System.out.printf("%s product code doesn't exist\n", choice);
             return null;
