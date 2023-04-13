@@ -20,6 +20,7 @@ public class VendingMachineInterface {
 
     public void display() {
         out.print(vendingMachine.displayInventory());
+        out.flush();
     }
 
     public void purchase() {
