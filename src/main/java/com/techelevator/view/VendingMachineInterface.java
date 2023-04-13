@@ -1,5 +1,7 @@
 package com.techelevator.view;
 
+import com.techelevator.products.Product;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -36,9 +38,12 @@ public class VendingMachineInterface {
                 vendingMachine.addMoney();
             } else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_SELECT_PRODUCT)) {
                 // Select Product
-                display();
-
-                vendingMachine.selectProduct();
+                String choice;
+                do {
+                    display();
+                    choice = takeOrderFromCustomer();
+                } while (choice == null);
+                vendingMachine.purchaseProduct(choice);
             } else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_FINISH_TRANSACTION)) {
                 // Finish Transaction
                 vendingMachine.finishTransaction();
@@ -46,6 +51,35 @@ public class VendingMachineInterface {
                 break;
             }
         }
-        vendingMachine.purchaseProduct();
+    }
+
+    /*
+    Ask the Customer for Product Choice(A1-A5 or B1-B5 or C1-C5 or D1-D5)
+    If the product choice(slot location) does not exist, tell the customer
+    If the product is sold out, tell the customer
+     */
+    private String takeOrderFromCustomer(){
+        // Get a product choice from the user
+        out.println("Please enter product shelf to purchase:");
+        String choice = in.nextLine();
+
+        // If the product code, doesn't exist,
+        // the vending machine informs the customer
+        Product productVM = vendingMachine.selectProduct(choice);
+        if(productVM == null) {
+            out.printf("%s product code doesn't exist\n", choice);
+            return null;
+        }
+
+        // If the product is sold out, tell the customer
+        if(productVM.getProductCount() == 0) {
+            out.printf("%s product sold out!\n", productVM.getName());
+            return null;
+        }
+
+        // Print what the customer chose with name, price and product count
+        out.printf("You chose %s with Price:$%.2f and Item Remaining:%d \n", productVM.getName(),
+                productVM.getPrice(), productVM.getProductCount());
+        return choice;
     }
 }

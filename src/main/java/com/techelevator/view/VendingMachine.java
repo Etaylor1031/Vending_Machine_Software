@@ -52,55 +52,17 @@ public class VendingMachine{
         return productRack.toString();
     }
 
-    /*
-    Ask the Customer for Product Choice(A1-A5 or B1-B5 or C1-C5 or D1-D5)
-    If the product choice(slot location) does not exist, tell the customer
-    If the product is sold out, tell the customer
-     */
-    public String takeOrderFromCustomer(){
-        // Get a product choice from the user
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Please enter product shelf to purchase:");
-        String choice = sc.nextLine();
-
-        // If the product code, doesn't exist,
-        // the vending machine informs the customer
-        Product productVM = productRack.getPurchasedProduct(choice);
-        if(productVM == null) {
-            System.out.printf("%s product code doesn't exist\n", choice);
-            return null;
-        }
-
-        // If the product is sold out, tell the customer
-        if(productVM.getProductCount() == 0) {
-            System.out.printf("%s product sold out!\n", productVM.getName());
-            return null;
-        }
-
-        // Print what the customer chose with name, price and product count
-        System.out.printf("You chose %s with Price:$%.2f and Item Remaining:%d \n", productVM.getName(), productVM.getPrice(), productVM.getProductCount());
-        return choice;
-    }
-
-    public void selectProduct() {
-        // Display the Vending Machine Products
-        displayInventory();
-
-        // If the choice doesn't exist, return
-        String productChoice = takeOrderFromCustomer();
-        if(productChoice == null)
-            return;
-
-        // Dispense the product
-        productRack.dispenseProduct(productChoice);
+    public Product selectProduct(String choice) {
+        return productRack.getPurchasedProduct(choice);
     }
 
     public void finishTransaction() {
         moneyHandler.returnChange();
     }
 
-    public void purchaseProduct() {
-
+    public void purchaseProduct(String productChoice) {
+        // Dispense the product
+        productRack.dispenseProduct(productChoice);
     }
 
     public BigDecimal readBalance() {
