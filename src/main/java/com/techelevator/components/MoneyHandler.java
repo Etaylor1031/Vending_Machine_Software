@@ -36,7 +36,7 @@ public class MoneyHandler {
         double[] denominations = {0.25, 0.10, 0.05};
 
         // array to hold the number of each denomination to return as change
-        double[] change = new double[denominations.length];
+        int[] change = new int[denominations.length];
 
         // calculate the total amount of change to be returned
         double remainingMoney = getBalance().doubleValue();
