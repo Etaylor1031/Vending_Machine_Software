@@ -79,8 +79,8 @@ public class VendingMachineInterface {
         }
 
         // Print what the customer chose with name, price and product count
-        out.printf("You chose %s with Price:$%.2f and Item Remaining:%d \n", productVM.getName(),
-                productVM.getPrice(), productVM.getProductCount());
+        out.printf("You chose %s with Price:$%.2f\n", productVM.getName(),
+                productVM.getPrice());
         return choice;
     }
 }

@@ -33,22 +33,23 @@ public class MoneyHandler {
 
     public double[] returnChange() {
         // array of denominations, in descending order
-        double[] denominations = {100.00, 50.00, 20.00, 10.00, 5.00, 1.00, 0.25, 0.10, 0.05, 0.01};
+        double[] denominations = {0.25, 0.10, 0.05};
 
         // array to hold the number of each denomination to return as change
         double[] change = new double[denominations.length];
 
         // calculate the total amount of change to be returned
-        double totalChange = customerMoney.subtract(balance).doubleValue();
+        double remainingMoney = getBalance().doubleValue();
 
         // print the total amount of change to be returned
-        System.out.println("Change to be returned: " + totalChange);
+        System.out.println("Change to be returned: " + remainingMoney);
 
         // loop through the denominations array and calculate the number of each denomination to return as change
-        for (int i = 0; i < denominations.length && totalChange > 0; i++) {
-            change[i] = Math.floor(totalChange / denominations[i]);
-            totalChange -= change[i] * denominations[i];
+        for (int i = 0; i < denominations.length && remainingMoney > 0; i++) {
+            change[i] = Math.floor(remainingMoney / denominations[i]);
+            remainingMoney -= change[i] * denominations[i];
         }
+
         // print out the number of each denomination to be returned as change
         System.out.println("Change denominations:");
         for (int i = 0; i < change.length; i++) {
@@ -64,4 +65,7 @@ public class MoneyHandler {
         return balance;
     }
 
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
 }

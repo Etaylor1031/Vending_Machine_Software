@@ -22,7 +22,7 @@ public class ProductRack {
             All drink items print "Glug Glug, Yum!"
             All gum items print "Chew Chew, Yum!"
          */
-    public String dispenseProduct(String productChoice, BigDecimal balance) {
+    public BigDecimal dispenseProduct(String productChoice, BigDecimal balance) {
         // Update balance
         Product productVM = inventory.get(productChoice);
         balance = balance.subtract(productVM.getPrice());
@@ -46,7 +46,7 @@ public class ProductRack {
         }
 
         System.out.println(message);
-        return message;
+        return balance;
     }
 
     public Product getPurchasedProduct(String choice) {
