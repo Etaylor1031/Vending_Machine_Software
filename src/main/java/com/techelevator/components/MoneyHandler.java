@@ -31,10 +31,10 @@ public class MoneyHandler {
         } while(answer.equals("Y"));
     }
 
-    public double[] returnChange() {
+    public int[] returnChange() {
         // array of denominations, in descending order
         double[] denominations = {0.25, 0.10, 0.05};
-
+        final String[] COINS = {"Quarters", "Dimes", "Nickels"};
         // array to hold the number of each denomination to return as change
         int[] change = new int[denominations.length];
 
@@ -46,14 +46,14 @@ public class MoneyHandler {
 
         // loop through the denominations array and calculate the number of each denomination to return as change
         for (int i = 0; i < denominations.length && remainingMoney > 0; i++) {
-            change[i] = Math.floor(remainingMoney / denominations[i]);
+            change[i] = (int) Math.floor(remainingMoney / denominations[i]);
             remainingMoney -= change[i] * denominations[i];
         }
 
         // print out the number of each denomination to be returned as change
         System.out.println("Change denominations:");
         for (int i = 0; i < change.length; i++) {
-            System.out.println(change[i]);
+            System.out.println(change[i] + " " + COINS[i]);
         }
         //reset the balance
         balance = DEFAULT_ZERO;
