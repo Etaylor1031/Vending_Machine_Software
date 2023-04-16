@@ -10,18 +10,39 @@ import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
+import javax.swing.text.NumberFormatter;
+import java.io.*;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 
 public class VendingMachine{
     private MoneyHandler moneyHandler;
     private ProductRack productRack;
+    private Map<String, Product> inventory = new LinkedHashMap<>();
 
 
 
-    public VendingMachine() {
+    public VendingMachine() throws IOException {
+
+        //Date and time format for the log.txt file per the requirements in the readme
+        DateTimeFormatter timeFormatterForLog = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        String timeLogger = timeFormatterForLog.format(LocalDateTime.now());
+
+        File log = new File("Log.txt");
+        FileWriter fw= new FileWriter(log, true);
+        PrintWriter logWriter = new PrintWriter(fw);// logWriter logs transactions and inventory
+
 
         // Create a File object using its path name
         String fileName = "vendingmachine.csv";
         File dataFile = new File(fileName);
+
 
         /*
          Read from the file
@@ -44,6 +65,10 @@ public class VendingMachine{
 
         this.productRack = new ProductRack(rackInventory);
         this.moneyHandler = new MoneyHandler();
+    }
+    //This map is needed for the vendingmachineSalesreport file
+    public Map<String, Product> getInventory() {
+        return inventory;
     }
 
     /*
