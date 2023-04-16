@@ -66,7 +66,7 @@ public class VendingMachine{
         this.productRack = new ProductRack(rackInventory);
         this.moneyHandler = new MoneyHandler();
     }
-    //This map is needed for the vendingmachineSalesreport file
+    //This is needed for the vendingmachineSalesreport file
     public Map<String, Product> getInventory() {
         return inventory;
     }
