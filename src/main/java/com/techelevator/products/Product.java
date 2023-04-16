@@ -69,4 +69,18 @@ public class Product {
     public void decrementProductCount(){
         this.productCount--;
     }
+
+    public void printSound() {
+        String message = "";
+        // Assign the message of productType(Chip, Candy, Drink, Gum)
+        if(productType.equals("Chip")) {
+            System.out.println("Crunch Crunch, Yum!");
+        } else if(productType.equals("Candy")) {
+            System.out.println("Munch Munch, Yum!");
+        } else if(productType.equals("Drink")) {
+            System.out.println("Glug glug, Yum!");
+        } else if(productType.equals("Gum")) {
+            System.out.println("Chew chew, Yum!");
+        }
+    }
 }
