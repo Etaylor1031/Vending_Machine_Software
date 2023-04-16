@@ -33,6 +33,7 @@ public class VendingMachineInterface {
         while(true) {
             // Do Purchase
             out.printf("Current Money Provided: $%.2f\n", vendingMachine.readBalance());
+            out.flush();
             String purchaseChoice = (String) purchaseMenu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
             if(purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
                 // Feed Money
@@ -62,6 +63,7 @@ public class VendingMachineInterface {
     private String takeOrderFromCustomer(){
         // Get a product choice from the user
         out.println("Please enter product shelf to purchase:");
+        out.flush();
         String choice = in.nextLine();
 
         // If the product code, doesn't exist,
@@ -69,18 +71,21 @@ public class VendingMachineInterface {
         Product productVM = vendingMachine.selectProduct(choice);
         if(productVM == null) {
             out.printf("%s product code doesn't exist\n", choice);
+            out.flush();
             return null;
         }
 
         // If the product is sold out, tell the customer
         if(productVM.getProductCount() == 0) {
             out.printf("%s product sold out!\n", productVM.getName());
+            out.flush();
             return null;
         }
 
         // Print what the customer chose with name, price and product count
         out.printf("You chose %s with Price:$%.2f\n", productVM.getName(),
                 productVM.getPrice());
+        out.flush();
         return choice;
     }
 }
