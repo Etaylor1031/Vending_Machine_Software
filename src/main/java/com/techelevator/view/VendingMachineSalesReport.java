@@ -51,10 +51,6 @@ public class VendingMachineSalesReport {
         File vendingMachineSalesReport = new File("sales-reports/" +
                 localDateAndTimeNow + "_SALES_REPORT.txt");
 
-
-
-
-
         try (Scanner vendingMachineLogReader = new Scanner(vendingMachineLog);
              PrintWriter salesReport = new PrintWriter(vendingMachineSalesReport)) {
 
@@ -72,7 +68,7 @@ public class VendingMachineSalesReport {
                     if (salesReportInventory.containsKey(itemName)) {
                         int quantitySold = salesReportInventory.get(itemName);
                         salesReportInventory.put(itemName, quantitySold + 1);
-                        totalSales += vendingMachine.getInventory().get(itemCode).getPrice();
+                        totalSales.add(vendingMachine.getInventory().get(itemCode).getPrice());
                     }
                 }
             }
@@ -80,7 +76,7 @@ public class VendingMachineSalesReport {
             for (String itemName : salesReportInventory.keySet()) {
                 salesReport.println(itemName + "|" + salesReportInventory.get(itemName));
             }
-            //formats the total sales ouput
+            //formats the total sales output
             NumberFormat formatter = NumberFormat.getCurrencyInstance();
             String totalSalesAsString = formatter.format(totalSales);
 

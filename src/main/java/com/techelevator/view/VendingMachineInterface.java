@@ -2,6 +2,7 @@ package com.techelevator.view;
 
 import com.techelevator.products.Product;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -12,7 +13,7 @@ public class VendingMachineInterface {
     private Scanner in;
     private PrintWriter out;
 
-    public VendingMachineInterface(InputStream input, OutputStream output) {
+    public VendingMachineInterface(InputStream input, OutputStream output) throws IOException {
         this.vendingMachine = new VendingMachine();
         this.in = new Scanner(input);
         this.out = new PrintWriter(output);
