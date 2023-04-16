@@ -26,8 +26,6 @@ public class VendingMachine{
     private ProductRack productRack;
     private Map<String, Product> inventory = new LinkedHashMap<>();
 
-
-
     public VendingMachine() throws IOException {
 
         //Date and time format for the log.txt file per the requirements in the readme
