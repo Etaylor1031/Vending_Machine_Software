@@ -7,19 +7,10 @@ public class Product {
     private String name;
     private BigDecimal price;
     private int productCount;
-
     private String productType;
     private static final int  MAXIMUM_QUANTITY_AVAILABLE = 5;
 
     public Product() {}
-
-    public Product(String name, BigDecimal price, String productType, int productCount) {
-        this.name = name;
-        price = price.setScale(2, RoundingMode.CEILING);
-        this.price = price;
-        this.productType = productType;
-        this.productCount = productCount;
-    }
 
     public Product (String[] productDetails) {
 
@@ -70,9 +61,7 @@ public class Product {
         this.productCount--;
     }
 
-    public void printSound() {
-        String message = "";
-        // Assign the message of productType(Chip, Candy, Drink, Gum)
+    public  void printSound() {
         if(productType.equals("Chip")) {
             System.out.println("Crunch Crunch, Yum!");
         } else if(productType.equals("Candy")) {

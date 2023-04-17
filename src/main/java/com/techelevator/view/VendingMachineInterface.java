@@ -2,20 +2,21 @@ package com.techelevator.view;
 
 import com.techelevator.products.Product;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Scanner;
 
 public class VendingMachineInterface {
     private VendingMachine vendingMachine;
     private Scanner in;
     private PrintWriter out;
+    private static PrintWriter writerSales = null;
 
-    public VendingMachineInterface(InputStream input, OutputStream output) throws IOException {
+    public VendingMachineInterface(InputStream input, OutputStream output){
         this.vendingMachine = new VendingMachine();
         this.in = new Scanner(input);
         this.out = new PrintWriter(output);
@@ -60,7 +61,7 @@ public class VendingMachineInterface {
             } else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_FINISH_TRANSACTION)) {
                 // Finish Transaction
                 vendingMachine.finishTransaction();
-                //Return to main menu
+                // Return to main menu
                 break;
             }
         }
@@ -102,5 +103,35 @@ public class VendingMachineInterface {
         */
 
         return choice;
+    }
+
+    public void salesReport() {
+        if(writerSales == null) {
+            try {
+                String salesFileName = "sales/sales-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_hh-mm-ss_a")) + ".txt";
+                File salesFile = new File(salesFileName);
+                try {
+                    if(!salesFile.exists())
+                        salesFile.createNewFile();
+                } catch(IOException e) {
+                    throw new VendingMachineInterfaceException("Run Time Error: " + e.getMessage());
+                }
+
+                writerSales = new PrintWriter(new FileOutputStream(salesFileName));
+            } catch(FileNotFoundException e) {
+                throw new VendingMachineInterfaceException("Run Time Error: " + e.getMessage());
+            }
+        }
+
+        try {
+            final int MAXIMUM_QUANTITY_AVAILABLE = 5;
+            for(Map.Entry<String, Product> productEntry : vendingMachine.getProductRack().getInventory().entrySet()) {
+                writerSales.println(productEntry.getValue().getName() + "|" + (MAXIMUM_QUANTITY_AVAILABLE - productEntry.getValue().getProductCount()));
+            }
+            writerSales.printf("\n** TOTAL SALES** $%s\n\n", vendingMachine.getProductRack().getSales());
+            writerSales.flush();
+        } catch (VendingMachineInterfaceException e) {
+            throw new VendingMachineInterfaceException("Run Time Error: " + e.getMessage());
+        }
     }
 }

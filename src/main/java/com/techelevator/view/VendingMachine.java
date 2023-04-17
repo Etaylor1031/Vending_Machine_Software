@@ -24,23 +24,12 @@ import java.util.Scanner;
 public class VendingMachine{
     private MoneyHandler moneyHandler;
     private ProductRack productRack;
-    private Map<String, Product> inventory = new LinkedHashMap<>();
 
-    public VendingMachine() throws IOException {
-
-        //Date and time format for the log.txt file per the requirements in the readme
-        DateTimeFormatter timeFormatterForLog = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        String timeLogger = timeFormatterForLog.format(LocalDateTime.now());
-
-        File log = new File("Log.txt");
-        FileWriter fw= new FileWriter(log, true);
-        PrintWriter logWriter = new PrintWriter(fw);// logWriter logs transactions and inventory
-
+    public VendingMachine() {
 
         // Create a File object using its path name
         String fileName = "vendingmachine.csv";
         File dataFile = new File(fileName);
-
 
         /*
          Read from the file
@@ -64,14 +53,7 @@ public class VendingMachine{
         this.productRack = new ProductRack(rackInventory);
         this.moneyHandler = new MoneyHandler();
     }
-    //This is needed for the vendingmachineSalesreport file
-    public Map<String, Product> getInventory() {
-        return inventory;
-    }
 
-    /*
-    Displays the Vending Machine to the User
-     */
     public String displayInventory() {
         return productRack.toString();
     }
@@ -85,7 +67,6 @@ public class VendingMachine{
     }
 
     public void purchaseProduct(String productChoice) {
-        // Dispense the product
         moneyHandler.setBalance(productRack.dispenseProduct(productChoice, moneyHandler.getBalance()));
     }
 
@@ -95,5 +76,9 @@ public class VendingMachine{
 
     public void addMoney() {
         moneyHandler.feedMoney();
+    }
+
+    public ProductRack getProductRack() {
+        return productRack;
     }
 }

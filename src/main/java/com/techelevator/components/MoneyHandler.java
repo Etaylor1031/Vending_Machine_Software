@@ -1,12 +1,14 @@
 package com.techelevator.components;
 
+import com.techelevator.util.VMLog;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 import java.util.Set;
 
 public class MoneyHandler {
     private BigDecimal balance;
-    private static final BigDecimal DEFAULT_ZERO = BigDecimal.valueOf(0);
+    private static final BigDecimal DEFAULT_ZERO = BigDecimal.valueOf(0).setScale(2);
     private static final Set<String> PAPER_BILLS = Set.of("1","2","5","10","20");
     private static final String[] COINS = {"Quarters", "Dimes", "Nickels"};
     private static final double[] DENOMINATIONS = {0.25, 0.10, 0.05};   // array of denominations, in descending order
@@ -39,11 +41,14 @@ public class MoneyHandler {
             if(validateInputMoney(feedMoney) == false)
                 continue;
 
-            balance = balance.add(new BigDecimal(feedMoney));
-            System.out.printf("Current Money Provided: $%.2f\n", balance);
+            BigDecimal amountDeposited = new BigDecimal(feedMoney).setScale(2);
+            BigDecimal newBalance = balance.add(new BigDecimal(feedMoney)).setScale(2);
+            VMLog.log("FEED MONEY: $" + amountDeposited + " $" + newBalance);
+            balance = newBalance;
+
+            System.out.printf("Current Money Provided: $%.2f\n", newBalance);
 
             do {
-                // Ask the user if he/she wants to continue feeding
                 System.out.print("Continue feeding money?(Y/N) ");
                 answer = sc.nextLine();
             } while(!answer.equalsIgnoreCase("Y") && !answer.equalsIgnoreCase("N"));
@@ -58,7 +63,7 @@ public class MoneyHandler {
         double remainingMoney = getBalance().doubleValue();
 
         // print the total amount of change to be returned
-        System.out.println("Change to be returned: $" + remainingMoney);
+        System.out.println("Change to be returned: $" + getBalance());
 
         // loop through the denominations array and calculate the number of each denomination to return as change
         for (int i = 0; i < DENOMINATIONS.length && remainingMoney > 0; i++) {
@@ -72,7 +77,10 @@ public class MoneyHandler {
             System.out.println(change[i] + " " + COINS[i]);
         }
         //reset the balance
+        BigDecimal oldBalance = balance.setScale(2);
         balance = DEFAULT_ZERO;
+        VMLog.log("GIVE CHANGE: $" + oldBalance + " $" + balance);
+
         // return the array of denominations
         return change;
     }

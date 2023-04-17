@@ -1,46 +1,44 @@
 package com.techelevator.components;
 
 import com.techelevator.products.Product;
+import com.techelevator.util.VMLog;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
 public class ProductRack {
     private Map<String, Product> inventory;
-
+    private BigDecimal sales;
 
     public ProductRack(Map<String, Product> rackInventory) {
         this.inventory = rackInventory;
+        this.sales = BigDecimal.valueOf(0).setScale(2);
+    }
+    public Map<String, Product> getInventory() {
+        return inventory;
+    }
+    public BigDecimal getSales() {
+        return sales;
     }
 
-    /*
-        Dispense a product will update the balance and productCount
-        It will also print the item name, price, and balance
-        Dispensing also returns a message:
-            All chip items print "Crunch Crunch, Yum!"
-            All candy items print "Munch Munch, Yum!"
-            All drink items print "Glug Glug, Yum!"
-            All gum items print "Chew Chew, Yum!"
-         */
     public BigDecimal dispenseProduct(String productChoice, BigDecimal balance) {
         // Update balance
         Product productVM = inventory.get(productChoice);
-        BigDecimal newBalance = balance.subtract(productVM.getPrice());
+
+        BigDecimal newBalance = balance.subtract(productVM.getPrice()).setScale(2);
 
         // If we don't have enough balance to make the purchase, then tell the customer he/she doesn't have enough funds
-        // Return the balance and to the purchase
-        if(newBalance.compareTo(BigDecimal.valueOf(0)) == 0 ||
-           newBalance.compareTo(BigDecimal.valueOf(0)) == -1  ) {
+        // Return the balance and to the purchase menu
+        if(newBalance.compareTo(BigDecimal.valueOf(0)) == 0 || newBalance.compareTo(BigDecimal.valueOf(0)) == -1) {
             System.out.println("Insufficient funds. Please feed money first");
             return balance;
         }
 
-        // Update productCount
+        sales = sales.add(productVM.getPrice());
+        VMLog.log(productVM.getName() + " " + productChoice + " $" + productVM.getPrice() + " $" + newBalance);
         productVM.decrementProductCount();
 
-        // Print the item name, price, and balance
-        System.out.printf("Dispensed %s with a Price of $%.2f. Current Money Remaining is $%.2f\n", productVM.getName(),
-                productVM.getPrice(), newBalance);
+        System.out.printf("Dispensed %s with a Price of $%.2f. Current Money Remaining is $%.2f\n", productVM.getName(), productVM.getPrice(), newBalance);
         productVM.printSound();
 
         return newBalance;
