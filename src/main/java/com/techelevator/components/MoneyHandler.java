@@ -25,10 +25,7 @@ public class MoneyHandler {
 
         return true;
     }
-
-    /*
-        Ask the customer to repeatedly feed money into the vending machine
-         */
+    
     public void feedMoney() {
         String answer = "Y";
         do {
