@@ -13,6 +13,11 @@ public class VendingMachineCLI {
 	private static final String MAIN_MENU_OPTION_SALES_REPORT = "Sales Report";
 	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT, MAIN_MENU_OPTION_SALES_REPORT };
 
+	//variable declaration
+	VendingMachine newVendingMachine;
+	VendingMachineSalesReport salesReport;
+
+
 	private Menu menu;
 
 	public VendingMachineCLI(Menu menu) {
@@ -34,6 +39,9 @@ public class VendingMachineCLI {
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				break;
 			} else if (choice.equals(MAIN_MENU_OPTION_SALES_REPORT)) {
+				// generate sales report if cusTomer selects sales report
+				salesReport = new VendingMachineSalesReport(newVendingMachine);
+				salesReport.generateSalesReport();
 
 			}
 
