@@ -39,7 +39,8 @@ public class ProductRack {
         productVM.decrementProductCount();
 
         // Print the item name, price, and balance
-        System.out.printf("Dispensed %s with a Price of $%.2f. Current Money Remaining is $%.2f\n", productVM.getName(), productVM.getPrice(), newBalance);
+        System.out.printf("Dispensed %s with a Price of $%.2f. Current Money Remaining is $%.2f\n", productVM.getName(),
+                productVM.getPrice(), newBalance);
         productVM.printSound();
 
         return newBalance;
@@ -61,8 +62,10 @@ public class ProductRack {
         productListings += "--------------------------------------------------------------------\n";
         // Iterate through the map and organize the data into a formatted String for displaying to user
         for(Map.Entry<String, Product> productEntry : inventory.entrySet()) {
-            productListings += String.format("%-15s %-20s %10s %20s\n",productEntry.getKey(), productEntry.getValue().getName(), productEntry.getValue().getPrice(),
-                    productEntry.getValue().getProductCount() == 0 ? "SOLD OUT" : productEntry.getValue().getProductCount()) ; // Prints SOLD OUT if productCount is 0
+            productListings += String.format("%-15s %-20s %10s %20s\n",productEntry.getKey(),
+                    productEntry.getValue().getName(), productEntry.getValue().getPrice(),
+                    productEntry.getValue().getProductCount() == 0 ? "SOLD OUT" : productEntry.getValue().getProductCount());
+            // Prints SOLD OUT if productCount is 0
         }
         productListings += "--------------------------------------------------------------------\n";
         return productListings;
