@@ -25,6 +25,13 @@ public class Product {
 
     }
 
+    public Product(String name, BigDecimal price, String productType, int productCount) {
+        this.name = name;
+        this.price = price;
+        this.productCount = productCount;
+        this.productType = productType;
+    }
+
     public String getName() {
         return name;
     }
